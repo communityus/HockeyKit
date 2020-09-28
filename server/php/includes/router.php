@@ -96,27 +96,10 @@ class Router
         }
         
         $this->collect_arguments();
-        
-        $protocol = 'http';
-        $default_port = 80;
-        if (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on')
-        {
-            $protocol = 'https';
-            $default_port = 443;
-        }
-        if (defined('BASE_URL') && BASE_URL !== NULL) {
-        	$this->baseURL =  BASE_URL;
-        } else {         
-		$this->baseURL = sprintf(
-			'%s://%s%s%s/',
-			$protocol,
-			$_SERVER['SERVER_NAME'],
-			$_SERVER['SERVER_PORT'] != $default_port ? ':'.$_SERVER['SERVER_PORT'] : '',
-			$path
-			);
-        }
-        
-        $this->servername =  $_SERVER['SERVER_NAME'];
+
+		// This was pretty completely wrong before.
+		$this->baseURL = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/";
+        $this->servername =  $_SERVER['HTTP_HOST'];
 
         $is_v1_client = strpos($_SERVER['HTTP_USER_AGENT'], 'CFNetwork') !== false;
 

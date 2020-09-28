@@ -1,5 +1,7 @@
-# Server Requirements:
-- PHP 5.x
+# Docker image
+* Packed up with Nginx, PHP 7, and Alpine for a really small memory footprint and high performance.
+* Simply mount a volume at /hockey_data/ that will contain all your app versions, so it survives container restarts.
+* All traffic happens over port 8000.
 
 # About:
 * This server part is required for handling update requests by the client framework
@@ -7,11 +9,8 @@
 * It can handle multiple applications via different bundle identifiers (I highly suggest using different bundle identifiers for Debug, AdHoc Beta and AppStore release builds !!!)
 
 
-# Installation PHP Server:
-* Copy the content of the public subfolder, including the .htaccess file (!!), into a publicly accessible directory on your web server
-* Copy the content of the includes subfolder into a publicly not accessible directory (for security) on your web server
-* Adjust the path to the includes subfolder in HOCKEY_INCLUDE_DIR definition in config.php
-* Done
+# Security
+* Strongly advise you put this behind an oauth2-proxy container, along with cert-bot, so you always serve over HTTPS and only after you've authenticated externally.
 
 
 # How to add a new iOS application version (Xcode 3):
