@@ -1,5 +1,5 @@
 <?php
-    define('HOCKEY_AUTH_SECRET', 'ChangeThisToYourOwnSecretString');
+    define('HOCKEY_AUTH_SECRET', getenv('AUTH_SECRET', true) ? getenv('AUTH_SECRET') : NULL);
     define('ENABLE_LOGGING', true);
     // for use behind reverse proxy
     // Ex: define('BASE_URL', 'http://example.com/HockeyKit/');

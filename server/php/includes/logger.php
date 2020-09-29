@@ -22,12 +22,13 @@ class Logger
             $msg
         );
         
-        $path = dirname(dirname(__FILE__)) . '/log';
-        if(!is_dir($path))
-        {
-            mkdir($path);
-        }
-        @file_put_contents("$path/hockey.log", "$msg\n", FILE_APPEND);
+//        $path = dirname(dirname(__FILE__)) . '/log';
+//        if(!is_dir($path))
+//        {
+//            mkdir($path);
+//        }
+//        @file_put_contents("$path/hockey.log", "$msg\n", FILE_APPEND);
+		error_log($msg, 0);
     }
 }
 
